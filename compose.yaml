@@ -1,0 +1,17 @@
+services:
+  backend:
+    build: ./cadastro-usuarios
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:h2:file:/data/cadastro;DB_CLOSE_ON_EXIT=FALSE
+      SPRING_DATASOURCE_USERNAME: sa
+      SPRING_DATASOURCE_PASSWORD: ""
+    volumes:
+      - dados-h2:/data
+  frontend:
+    build: ./cadastro-usuarios-web
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+volumes:
+  dados-h2:

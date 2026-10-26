@@ -1,0 +1,76 @@
+<main class="container">
+  <section class="hero">
+    <span class="eyebrow">LABORATÓRIO DEVOPS</span>
+    <h1>Cadastro de Usuários</h1>
+  </section>
+  <section class="card">
+    <h2>Novo usuário</h2>
+    <form (ngSubmit)="salvar()">
+      <label
+        >Nome completo<input
+          name="nome"
+          [(ngModel)]="usuario.nome"
+          required
+          placeholder="Maria da Silva" /></label
+      ><label
+        >E-mail<input
+          type="email"
+          name="email"
+          [(ngModel)]="usuario.email"
+          required
+          placeholder="maria@email.com"
+      /></label>
+      <div class="grid">
+        <label
+          >CEP<input
+            name="cep"
+            [(ngModel)]="usuario.cep"
+            (blur)="buscarCep()"
+            required
+            placeholder="01001-000" /></label
+        ><label
+          >Número<input
+            name="numero"
+            [(ngModel)]="usuario.numero"
+            required
+            placeholder="123"
+        /></label>
+      </div>
+      <div class="grid">
+        <label
+          >Logradouro<input
+            name="logradouro"
+            [(ngModel)]="usuario.logradouro"
+            readonly /></label
+        ><label
+          >Bairro<input name="bairro" [(ngModel)]="usuario.bairro" readonly
+        /></label>
+      </div>
+      <div class="grid">
+        <label
+          >Cidade<input
+            name="cidade"
+            [(ngModel)]="usuario.cidade"
+            readonly /></label
+        ><label>UF<input name="uf" [(ngModel)]="usuario.uf" readonly /></label>
+      </div>
+      <button type="submit">Cadastrar usuário</button>
+      <p class="status" *ngIf="mensagem">{{ mensagem }}</p>
+      <p class="hint" *ngIf="carregandoCep">Consultando CEP...</p>
+    </form>
+  </section>
+  <section class="card">
+    <h2>Usuários cadastrados</h2>
+    <div class="empty" *ngIf="!usuarios.length">
+      Nenhum usuário cadastrado ainda.
+    </div>
+    <article class="user" *ngFor="let item of usuarios">
+      <strong>{{ item.nome }}</strong
+      ><span>{{ item.email }}</span
+      ><span
+        >{{ item.logradouro }}, {{ item.numero }} — {{ item.cidade }} /
+        {{ item.uf }}</span
+      >
+    </article>
+  </section>
+</main>
